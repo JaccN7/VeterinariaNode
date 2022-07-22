@@ -32,4 +32,18 @@ app.use('/', ConfigRoutes);
 app.use('/mascotas', MascotasRoutes);
 app.use('/usuarios', UsuariosRoutes);
 
+app.use((req, res, next) => {
+    const error = new Error('No encontrado');
+    error.status = 404;
+    next(error);
+});
+
+app.use((error, req, res, next) => {
+    res.status(error.status || 500).render("404").json({
+        error: {
+            message: error.message
+        }
+    });
+})
+
 module.exports = app;
