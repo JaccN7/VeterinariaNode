@@ -1,0 +1,28 @@
+<%- include("templates/header") %>
+    <div class="wrapper w-70">
+        <div class="logo">
+            <img src="/public/images/vet.png" alt="Logo">
+        </div>
+        <div class="text-center mt-4 name">
+            Veterinaria
+        </div>
+        
+        <form class="p-3 mt-3">
+            <h6>Rut Usuario</h6>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="rutUsuario" id="rutUsuario" placeholder="Sin digito verificador ni guión">
+            </div>
+            <h6>Contraseña</h6>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="pwd" placeholder="Password">
+            </div>
+            <button class="btn mt-3" id="btnLogin" type="button">Iniciar Sesión</button>
+        </form>
+        <div class="text-center fs-6">
+            <a href="#">¿Olvido la constraseña?</a> o <a href="#">Registrarse</a>
+        </div>
+        <div class="text-center fs-6 mt-3" id="info"></div>
+    </div>
+<%- include("templates/footer") %>
