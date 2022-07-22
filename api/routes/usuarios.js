@@ -99,10 +99,11 @@ router.post('/login', async (req, res, next) => {
                 res.status(200).json({ 
                     token: token, 
                     estado: 200,
+                    nombre: usuario.nombre,
                     message: 'Inicio de sesión exitoso' 
                 }).end();
             } else {
-                res.status(401).json({
+                res.status(401).getHeaders({
                     estado: 401,
                     message: 'Contraseña incorrecta'
                 });
@@ -121,7 +122,7 @@ router.post('/login', async (req, res, next) => {
 });
 
 //Actualizar un usuario
-router.put('/:rutUsuario', checkAuth, async (req, res, next) => {
+router.put('/:rutUsuario', async (req, res, next) => {
     const id = req.params.rutUsuario;
     try {
         const result = await Usuario.updateOne({ rutUsuario: id }, { $set: req.body });
@@ -137,7 +138,7 @@ router.put('/:rutUsuario', checkAuth, async (req, res, next) => {
 });
 
 //Eliminar un usuario
-router.delete('/:rutUsuario', checkAuth, async (req, res, next) => {
+router.delete('/:rutUsuario', async (req, res, next) => {
     const id = req.params.rutUsuario;
     try {
         const result = await Usuario.remove({ rutUsuario: id });

@@ -7,11 +7,11 @@ const checkAuth = require('../middleware/check-auth');
 const Mascota = require('../models/mascota');
 
 //Obtener todas las mascotas
-router.get('/', checkAuth, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         const docs = await Mascota.find();
         if (docs.length > 0) {
-            res.status(200).json(docs);
+            res.status(200).render('dashboard');
         } else {
             res.status(404).json({
                 message: 'No hay mascotas registradas'
@@ -25,7 +25,7 @@ router.get('/', checkAuth, async (req, res, next) => {
 });
 
 //Obtener una mascota por id
-router.get('/:mascotasId', checkAuth, async (req, res, next) => {
+router.get('/:mascotasId', async (req, res, next) => {
     const id = parseInt(req.params.mascotasId);
     try {
         const doc = await Mascota.findOne({ mascotaId: id });
@@ -40,7 +40,7 @@ router.get('/:mascotasId', checkAuth, async (req, res, next) => {
 });
 
 //Crear una mascota
-router.post('/', checkAuth, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     const mascota = new Mascota({
         _id: new mongoose.Types.ObjectId(),
         mascotaId: req.body.mascotaId,
@@ -67,7 +67,7 @@ router.post('/', checkAuth, async (req, res, next) => {
 });
 
 //Actualizar una mascota
-router.put('/:mascotaId', checkAuth, async (req, res, next) => {
+router.put('/:mascotaId', async (req, res, next) => {
     const id = req.params.mascotaId;
     try {
         const result = await Mascota.updateOne({ mascotaId: id }, { $set: req.body });
@@ -83,7 +83,7 @@ router.put('/:mascotaId', checkAuth, async (req, res, next) => {
 });
 
 //Eliminar una mascota
-router.delete('/:mascotaId', checkAuth, async (req, res, next) => {
+router.delete('/:mascotaId', async (req, res, next) => {
     const id = req.params.mascotaId;
     try {
         const doc = await Mascota.remove({ mascotaId: id });
