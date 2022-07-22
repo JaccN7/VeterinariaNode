@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
     try {
         const docs = await Mascota.find();
         if (docs.length > 0) {
-            res.status(200).render('dashboard');
+            res.status(200).json(docs);
         } else {
             res.status(404).json({
                 message: 'No hay mascotas registradas'
